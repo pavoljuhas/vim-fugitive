@@ -242,7 +242,6 @@ augroup fugitive
   autocmd BufNewFile,BufReadPost * call fugitive#detect(expand('%:p'))
   autocmd FileType           netrw call fugitive#detect(expand('%:p'))
   autocmd User NERDTreeInit,NERDTreeNewRoot call fugitive#detect(b:NERDTree.root.path.str())
-  autocmd VimEnter * if expand('<amatch>')==''|call fugitive#detect(getcwd())|endif
   autocmd CmdWinEnter * call fugitive#detect(expand('#:p'))
   autocmd BufWinLeave * execute getwinvar(+bufwinnr(+expand('<abuf>')), 'fugitive_leave')
 augroup END
@@ -3128,3 +3127,9 @@ augroup fugitive_foldtext
         \    set foldtext=fugitive#foldtext() |
         \ endif
 augroup END
+
+" Section: Initialization at vim startup
+
+if !v:vim_did_enter && !argc()
+  call fugitive#detect(getcwd())
+endif
