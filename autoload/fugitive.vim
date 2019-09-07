@@ -5400,8 +5400,6 @@ function! fugitive#MapJumps(...) abort
       call s:Map('n', 'O',    ':<C-U>exe <SID>GF("tabedit")<CR>', '<silent>')
       call s:Map('n', 'p',    ':<C-U>exe <SID>GF("pedit")<CR>', '<silent>')
 
-      " disable C-N, C-P maps conflicting with quickfixmap.vim
-      if v:false
       if !exists('g:fugitive_no_maps')
         if exists(':CtrlP') && get(g:, 'ctrl_p_map') =~? '^<c-p>$'
           nnoremap <buffer> <silent> <C-P> :<C-U>execute line('.') == 1 ? 'CtrlP ' . fnameescape(<SID>Tree()) : <SID>PreviousItem(v:count1)<CR>
@@ -5409,7 +5407,6 @@ function! fugitive#MapJumps(...) abort
           nnoremap <buffer> <silent> <C-P> :<C-U>execute <SID>PreviousItem(v:count1)<CR>
         endif
         nnoremap <buffer> <silent> <C-N> :<C-U>execute <SID>NextItem(v:count1)<CR>
-      endif
       endif
       call s:MapMotion('(', 'exe <SID>PreviousItem(v:count1)')
       call s:MapMotion(')', 'exe <SID>NextItem(v:count1)')
