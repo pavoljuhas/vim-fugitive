@@ -433,9 +433,3 @@ endfunction
 
 call s:Map('c', '<C-R><C-G>', 'fnameescape(fugitive#Object(@%))', '<expr>')
 call s:Map('n', 'y<C-G>', ':<C-U>call setreg(v:register, fugitive#Object(@%))<CR>', '<silent>')
-
-" Section: Initialization at vim startup
-
-if !v:vim_did_enter && !argc()
-  call FugitiveDetect(getcwd())
-endif
